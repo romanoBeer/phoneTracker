@@ -30,17 +30,18 @@ def Track():
     zone.config(text=time)
 
     #longitude and latitude
-    geolocater=Nominatim(user_agent="geoapiExercises")
-    location=geolocater.geocode(locate)
-
     lng=location.longitude
     lat=location.latitude
+    
+    geolocator = Nominatim(user_agent="phoneTracker")
+    location=geolocator.geocode(locate)
+
     longitude.config(text=lng)
     latitude.config(text=lat)
 
     #time showing in phone
     obj = timezonefinder()
-    result=obj.timezone_at(lng=latitude.longitude,lat=location.latitude)
+    result=obj.timezone_at(lng=location.longitude,lat=location.latitude)
 
     home=pytz.timezone(result)
     local_time=datetime.now(home)
@@ -53,25 +54,28 @@ root.iconphoto(False, icon)
 
 #logo
 logo=PhotoImage(file="logo image.png")
-Label(root, image=logo).place(x=250,y=100)
+Label(root, image=logo).place(x=240,y=70)
+
+Eback=PhotoImage(file="search png.png")
+Label(root, image=Eback).place(x=20,y=190)
 
 #heading
 Heading=Label(root,text="TRACK NUMBER", font=('arial',15,'bold'))
 Heading.place(x=90,y=110)
 
 #bottom box
-#Box=PhotoImage(file="bottom png.png")
-#Label(root,image=Box).place(x=-2,y=355)
+Box=PhotoImage(file="bottom png.png")
+Label(root,image=Box).place(x=-2,y=355)
 
 #entry
 entry=StringVar()
-enter_number=Entry(root,textvariable=entry,width=15, justify="center", font=("arial",20))
+enter_number=Entry(root,textvariable=entry,width=17, justify="center", bd=0, font=("arial",20))
 enter_number.place(x=50,y=220)
 
 #search button
-search_image=PhotoImage(file="search png.png")
+search_image=PhotoImage(file="search.png")
 search=Button(root,image=search_image,borderwidth=0,cursor="hand2",bd=0,command=Track)
-search.place(x=290,y=220)
+search.place(x=35,y=300)
 
 #label(info)
 country=Label(root,text="Country:",bg="#57adff",fg="#000000",font=("arial",10,"bold"))
